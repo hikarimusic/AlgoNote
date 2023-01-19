@@ -3,6 +3,9 @@ Data Structure
 
 Array
 -----
+:insert: O(N)
+:delete: O(N)
+:get: O(1)
 
 .. tabs::
 
@@ -42,7 +45,7 @@ Array
             for i in range(array.len):
                 result.append(array.get(i))
             print(result)
-    
+
     .. code-tab:: c++
 
         working
@@ -53,6 +56,10 @@ Array
 
 Linked List
 -----------
+:insert_next: O(1)
+:insert_prev: O(1)
+:delete: O(1)
+:get: O(N)
 
 .. tabs::
 
@@ -95,7 +102,6 @@ Linked List
                 self.size += 1
 
             def delete(self, node):
-                if self.size == 0: return
                 if not node.prev:
                     self.head = node.next
                     node.next.prev = None
@@ -132,7 +138,6 @@ Linked List
             for i in range(linkedlist.size):
                 result.append(linkedlist.get(i).data)
             print(result)
-
     
     .. code-tab:: c++
 
@@ -144,6 +149,9 @@ Linked List
 
 Stack
 -----
+:push: O(1)
+:pop: O(1)
+:get: O(1)
 
 .. tabs::
 
@@ -156,16 +164,13 @@ Stack
                 self.top = 0
 
             def push(self, data):
-                if self.top == self.size: return
                 self.arr[self.top] = data
                 self.top += 1
             
             def pop(self):
-                if self.top == 0: return
                 self.top -= 1
             
             def get(self):
-                if self.top == 0: return
                 return self.arr[self.top - 1]
 
         if __name__ == '__main__':
@@ -192,6 +197,9 @@ Stack
 
 Queue
 -----
+:enqueue: O(1)
+:dequeue: O(1)
+:get: O(1)
 
 .. tabs::
 
@@ -206,18 +214,15 @@ Queue
                 self.len = 0
 
             def enqueue(self, data):
-                if self.len == self.size: return
                 self.arr[self.tail] = data
                 self.tail = (self.tail + 1) % self.size
                 self.len += 1
 
             def dequeue(self):
-                if self.len == 0: return
                 self.head = (self.head + 1) % self.size
                 self.len -= 1
 
             def get(self):
-                if self.len == 0: return
                 return self.arr[self.head]
 
         if __name__ == '__main__':
@@ -244,12 +249,62 @@ Queue
 
 Heap
 ----
+:insert: O(logN)
+:delete: O(logN)
+:get: O(1)
 
 .. tabs::
 
     .. code-tab:: python
 
-        working
+        class Heap:
+            def __init__(self, size):
+                self.size = size
+                self.arr = [None] * size
+                self.len = 0
+
+            def insert(self, data):
+                self.arr[self.len] = data
+                self.len += 1
+                i = self.len - 1
+                while i > 0 and self.arr[i] > self.arr[(i-1)//2]:
+                    self.arr[i], self.arr[(i-1)//2] = self.arr[(i-1)//2], self.arr[i]
+                    i = (i-1)//2
+
+            def delete(self):
+                self.arr[0], self.arr[self.len-1] = self.arr[self.len-1], self.arr[0]
+                self.len -= 1
+                i = 0
+                while (i*2+1) < self.len:
+                    if (i*2+2) >= self.len: mc = i*2+1
+                    else:
+                        if self.arr[i*2+1] > self.arr[i*2+2]: mc = i*2+1
+                        else: mc = i*2+2
+                    if self.arr[i] < self.arr[mc]:
+                        self.arr[i], self.arr[mc] = self.arr[mc], self.arr[i]
+                    i = mc
+
+            def get(self):
+                return self.arr[0]
+
+        if __name__ == '__main__':
+            heap = Heap(10)
+            heap.insert(3)
+            heap.insert(7)
+            heap.insert(5)
+            heap.insert(2)
+            heap.insert(1)
+            heap.insert(0)
+            heap.insert(8)
+            heap.insert(9)
+            heap.insert(4)
+            heap.insert(6)
+
+            result = []
+            for i in range(heap.len):
+                result.append(heap.get())
+                heap.delete()
+            print(result)
 
     .. code-tab:: c++
 
@@ -261,12 +316,69 @@ Heap
 
 Hash
 ----
+:insert: O(1) on average
+:delete: O(1) on average
+:get: O(1) on average
 
 .. tabs::
 
     .. code-tab:: python
 
-        working
+        class Node:
+            def __init__(self, key, data):
+                self.key = key
+                self.data = data
+                self.next = None
+
+        class Hash:
+            def __init__(self, size):
+                self.size = size
+                self.adj = [None] * size
+
+            def insert(self, key, data):
+                h_key = key % self.size
+                temp = Node(key, data)
+                temp.next = self.adj[h_key]
+                self.adj[h_key] = temp
+
+            def delete(self, key):
+                h_key = key % self.size
+                temp = self.adj[h_key]
+                prev = None
+                while temp:
+                    if temp.key == key:
+                        if prev == None: self.adj[h_key] = temp.next
+                        else: prev.next = temp.next
+                    else: prev = temp
+                    temp = temp.next
+            
+            def get(self, key):
+                h_key = key % self.size
+                temp = self.adj[h_key]
+                while temp:
+                    if temp.key == key:
+                        return temp
+                    temp = temp.next
+                return temp
+
+        if __name__ == '__main__':
+            hash = Hash(10)
+            hash.insert(1, "United States")
+            hash.insert(7, "Russia")
+            hash.insert(33, "France")
+            hash.insert(44, "United Kingdom")
+            hash.insert(49, "Germany")
+            hash.insert(81, "Japan")
+            hash.insert(82, "South Korea")
+            hash.insert(86, "China")
+            hash.insert(91, "India")
+            hash.insert(886, "Taiwan")
+            hash.delete(86)
+            hash.delete(7)
+
+            code = [1, 33, 44, 49, 81, 82, 91, 886]
+            for c in code:
+                print(c, hash.get(c).data)
 
     .. code-tab:: c++
 
@@ -278,6 +390,9 @@ Hash
 
 Tree
 ----
+:insert: O(N)
+:delete: O(N)
+:traverse: O(N)
 
 .. tabs::
 
@@ -371,6 +486,9 @@ Tree
 
 Graph
 -----
+:add_edge: O(1)
+:delete_edge: O(V)
+:neighbor: O(V)
 
 .. tabs::
 

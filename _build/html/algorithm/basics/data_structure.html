@@ -254,6 +254,17 @@
 <h1>Data Structure<a class="headerlink" href="#data-structure" title="Permalink to this heading">#</a></h1>
 <section id="array">
 <h2>Array<a class="headerlink" href="#array" title="Permalink to this heading">#</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">insert<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(N)</p>
+</dd>
+<dt class="field-even">delete<span class="colon">:</span></dt>
+<dd class="field-even"><p>O(N)</p>
+</dd>
+<dt class="field-odd">get<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(1)</p>
+</dd>
+</dl>
 <div class="tabs docutils container" data-tabgroup="">
 <ul class="tabbar">
 <li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
@@ -307,6 +318,20 @@ java</li></ul><div class="tab codetab selected" data-id="0">
 </div></div></section>
 <section id="linked-list">
 <h2>Linked List<a class="headerlink" href="#linked-list" title="Permalink to this heading">#</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">insert_next<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(1)</p>
+</dd>
+<dt class="field-even">insert_prev<span class="colon">:</span></dt>
+<dd class="field-even"><p>O(1)</p>
+</dd>
+<dt class="field-odd">delete<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(1)</p>
+</dd>
+<dt class="field-even">get<span class="colon">:</span></dt>
+<dd class="field-even"><p>O(N)</p>
+</dd>
+</dl>
 <div class="tabs docutils container" data-tabgroup="">
 <ul class="tabbar">
 <li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
@@ -350,7 +375,6 @@ java</li></ul><div class="tab codetab selected" data-id="0">
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="o">.</span><span class="n">prev</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
             <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">prev</span> <span class="o">=</span> <span class="kc">None</span>
@@ -400,6 +424,17 @@ java</li></ul><div class="tab codetab selected" data-id="0">
 </div></div></section>
 <section id="stack">
 <h2>Stack<a class="headerlink" href="#stack" title="Permalink to this heading">#</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">push<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(1)</p>
+</dd>
+<dt class="field-even">pop<span class="colon">:</span></dt>
+<dd class="field-even"><p>O(1)</p>
+</dd>
+<dt class="field-odd">get<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(1)</p>
+</dd>
+</dl>
 <div class="tabs docutils container" data-tabgroup="">
 <ul class="tabbar">
 <li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
@@ -413,16 +448,13 @@ java</li></ul><div class="tab codetab selected" data-id="0">
         <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span> <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">-=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -451,6 +483,17 @@ java</li></ul><div class="tab codetab selected" data-id="0">
 </div></div></section>
 <section id="queue">
 <h2>Queue<a class="headerlink" href="#queue" title="Permalink to this heading">#</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">enqueue<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(1)</p>
+</dd>
+<dt class="field-even">dequeue<span class="colon">:</span></dt>
+<dd class="field-even"><p>O(1)</p>
+</dd>
+<dt class="field-odd">get<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(1)</p>
+</dd>
+</dl>
 <div class="tabs docutils container" data-tabgroup="">
 <ul class="tabbar">
 <li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
@@ -466,18 +509,15 @@ java</li></ul><div class="tab codetab selected" data-id="0">
         <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span> <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tail</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">dequeue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">-=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -506,13 +546,71 @@ java</li></ul><div class="tab codetab selected" data-id="0">
 </div></div></section>
 <section id="heap">
 <h2>Heap<a class="headerlink" href="#heap" title="Permalink to this heading">#</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">insert<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(logN)</p>
+</dd>
+<dt class="field-even">delete<span class="colon">:</span></dt>
+<dd class="field-even"><p>O(logN)</p>
+</dd>
+<dt class="field-odd">get<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(1)</p>
+</dd>
+</dl>
 <div class="tabs docutils container" data-tabgroup="">
 <ul class="tabbar">
 <li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
 python</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
 c++</li><li class="tabbutton" data-id="2" onclick="sphinx_code_tabs_onclick(this)">
 java</li></ul><div class="tab codetab selected" data-id="0">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">working</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Heap</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">len</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">len</span><span class="p">:</span> <span class="n">mc</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">]:</span> <span class="n">mc</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span> <span class="n">mc</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="n">mc</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="n">mc</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="n">mc</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">mc</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">heap</span> <span class="o">=</span> <span class="n">Heap</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">heap</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">heap</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+    <span class="n">heap</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">heap</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">heap</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">heap</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">heap</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">heap</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">heap</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">heap</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">heap</span><span class="o">.</span><span class="n">len</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">heap</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="n">heap</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
 </div><div class="tab codetab" data-id="1">
@@ -526,13 +624,78 @@ java</li></ul><div class="tab codetab selected" data-id="0">
 </div></div></section>
 <section id="hash">
 <h2>Hash<a class="headerlink" href="#hash" title="Permalink to this heading">#</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">insert<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(1) on average</p>
+</dd>
+<dt class="field-even">delete<span class="colon">:</span></dt>
+<dd class="field-even"><p>O(1) on average</p>
+</dd>
+<dt class="field-odd">get<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(1) on average</p>
+</dd>
+</dl>
 <div class="tabs docutils container" data-tabgroup="">
 <ul class="tabbar">
 <li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
 python</li><li class="tabbutton" data-id="1" onclick="sphinx_code_tabs_onclick(this)">
 c++</li><li class="tabbutton" data-id="2" onclick="sphinx_code_tabs_onclick(this)">
 java</li></ul><div class="tab codetab selected" data-id="0">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">working</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">class</span> <span class="nc">Hash</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adj</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">size</span>
+
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">h_key</span> <span class="o">=</span> <span class="n">key</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">temp</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">h_key</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">h_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">h_key</span> <span class="o">=</span> <span class="n">key</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">h_key</span><span class="p">]</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">while</span> <span class="n">temp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">temp</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">prev</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">h_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">next</span>
+                <span class="k">else</span><span class="p">:</span> <span class="n">prev</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">next</span>
+            <span class="k">else</span><span class="p">:</span> <span class="n">prev</span> <span class="o">=</span> <span class="n">temp</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">next</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">h_key</span> <span class="o">=</span> <span class="n">key</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">h_key</span><span class="p">]</span>
+        <span class="k">while</span> <span class="n">temp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">temp</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">temp</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">return</span> <span class="n">temp</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="n">Hash</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;United States&quot;</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;Russia&quot;</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="s2">&quot;France&quot;</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="s2">&quot;United Kingdom&quot;</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">49</span><span class="p">,</span> <span class="s2">&quot;Germany&quot;</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">81</span><span class="p">,</span> <span class="s2">&quot;Japan&quot;</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">82</span><span class="p">,</span> <span class="s2">&quot;South Korea&quot;</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">86</span><span class="p">,</span> <span class="s2">&quot;China&quot;</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">91</span><span class="p">,</span> <span class="s2">&quot;India&quot;</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">886</span><span class="p">,</span> <span class="s2">&quot;Taiwan&quot;</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">86</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+
+    <span class="n">code</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">886</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">code</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">hash</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div><div class="tab codetab" data-id="1">
@@ -546,6 +709,17 @@ java</li></ul><div class="tab codetab selected" data-id="0">
 </div></div></section>
 <section id="tree">
 <h2>Tree<a class="headerlink" href="#tree" title="Permalink to this heading">#</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">insert<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(N)</p>
+</dd>
+<dt class="field-even">delete<span class="colon">:</span></dt>
+<dd class="field-even"><p>O(N)</p>
+</dd>
+<dt class="field-odd">traverse<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(N)</p>
+</dd>
+</dl>
 <div class="tabs docutils container" data-tabgroup="">
 <ul class="tabbar">
 <li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
@@ -642,6 +816,17 @@ java</li></ul><div class="tab codetab selected" data-id="0">
 </div></div></section>
 <section id="graph">
 <h2>Graph<a class="headerlink" href="#graph" title="Permalink to this heading">#</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">add_edge<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(1)</p>
+</dd>
+<dt class="field-even">delete_edge<span class="colon">:</span></dt>
+<dd class="field-even"><p>O(V)</p>
+</dd>
+<dt class="field-odd">neighbor<span class="colon">:</span></dt>
+<dd class="field-odd"><p>O(V)</p>
+</dd>
+</dl>
 <div class="tabs docutils container" data-tabgroup="">
 <ul class="tabbar">
 <li class="tabbutton selected" data-id="0" onclick="sphinx_code_tabs_onclick(this)">
