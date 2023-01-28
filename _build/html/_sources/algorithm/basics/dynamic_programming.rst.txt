@@ -198,7 +198,7 @@ Edit Distance
         }
 
         int ed(string X, string Y) {
-            int dp[X.length()+1][Y.length()+1];
+            int dp[X.length()+1][Y.length()+1] = {};
             for (int i=0; i<=X.length(); ++i) {
                 dp[i][0] = i;
             }
@@ -252,5 +252,185 @@ Edit Distance
                 String X = "sunday";
                 String Y = "saturday";
                 System.out.println(ed(X, Y));
+            }
+        }
+
+Minimum Partition
+-----------------
+
+:Time Complexity: :math:`O(N\times S)`
+:Auxiliary Space: :math:`O(N\times S)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def mp(arr):
+            n = len(arr)
+            s = sum(arr)
+            dp = [[False for j in range(s+1)] for i in range(n+1)]
+            for i in range(n+1):
+                dp[i][0] = True
+            for i in range(1, n+1):
+                for j in range(1, s+1):
+                    if arr[i-1] <= j:
+                        dp[i][j] = dp[i-1][j] or dp[i-1][j-arr[i-1]]
+                    else:
+                        dp[i][j] = dp[i-1][j]
+            m = s
+            for j in range(s//2, -1, -1):
+                if dp[n][j] == True:
+                    m = s - 2 * j 
+                    break
+            return m
+            
+        if __name__ == '__main__':
+            arr = [3, 1, 4, 2, 2, 1]
+            print(mp(arr))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int mp(int arr[], int n) {
+            int s = 0;
+            for (int i=0; i<n; ++i) {
+                s += arr[i];
+            }
+            bool dp[n+1][s+1] = {};
+            for (int i=0; i<n+1; ++i) {
+                for (int j=0; j<s+1; ++j) {
+                    if (j == 0) {
+                        dp[i][j] = true;
+                    } else {
+                        dp[i][j] = false;
+                    }
+                }
+            }
+            for (int i=1; i<n+1; ++i) {
+                for (int j=1; j<s+1; ++j) {
+                    if (arr[i-1]<=j) {
+                        dp[i][j] = dp[i-1][j] || dp[i-1][j-arr[i-1]];
+                    } else {
+                        dp[i][j] = dp[i-1][j];
+                    }
+                }
+            }
+            int m = s;
+            for (int j=s/2; j>=0; --j) {
+                if (dp[n][j] == true) {
+                    m = s - 2 * j;
+                    break;
+                }
+            }
+            return m;
+        }
+
+        int main() {
+            int arr[] = {3, 1, 4, 2, 2, 1};
+            cout << mp(arr, 6);
+        }
+
+    .. code-tab:: java
+
+        class MP {
+            static int mp(int arr[]) {
+                int n = arr.length;
+                int s = 0;
+                for (int a : arr) {
+                    s += a;
+                }
+                boolean dp[][] = new boolean[n+1][s+1];
+                for (int i=0; i<n+1; ++i) {
+                    for (int j=0; j<s+1; ++j) {
+                        if (j == 0) {
+                            dp[i][j] = true;
+                        } else {
+                            dp[i][j] = false;
+                        }
+                    }
+                }
+                for (int i=1; i<n+1; ++i) {
+                    for (int j=1; j<s+1; ++j) {
+                        if (arr[i-1] <= j) {
+                            dp[i][j] = dp[i-1][j] || dp[i-1][j-arr[i-1]];
+                        } else {
+                            dp[i][j] = dp[i-1][j];
+                        }
+                    }
+                }
+                int m = s;
+                for (int j=s/2; j>=0; --j) {
+                    if (dp[n][j]==true) {
+                        m = s - 2 * j;
+                        break;
+                    }
+                }
+                return m;
+            }
+            public static void main(String args[]) {
+                int arr[] = {3, 1, 4, 2, 2, 1};
+                System.out.println(mp(arr));
+            }
+        }
+
+Ways to Cover a Distance
+------------------------
+
+:Time Complexity: :math:`O(N)`
+:Auxiliary Space: :math:`O(N)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def wcd(n):
+            dp = [0 for i in range(n+1)]
+            dp[0] = 1
+            if n >= 1: dp[1] = 1
+            if n >= 2: dp[2] = 2
+            for i in range(3, n+1):
+                dp[i] = dp[i-1] + dp[i-2] + dp[i-3]
+            return dp[n]
+
+        if __name__ == '__main__':
+            print(wcd(4))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int wcd(int n) {
+            int dp[n+1] = {};
+            dp[0] = 1;
+            if (n>=1) dp[1] = 1;
+            if (n>=2) dp[2] = 2;
+            for (int i=3; i<n+1; ++i) {
+                dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
+            }
+            return dp[n];
+        }
+
+        int main() {
+            cout << wcd(4);
+        }
+
+    .. code-tab:: java
+
+        class WCD {
+            static int wcd(int n) {
+                int dp[] = new int[n+1];
+                dp[0] = 1;
+                if (n>=1) dp[1] = 1;
+                if (n>=2) dp[2] = 2;
+                for (int i=3; i<n+1; ++i) {
+                    dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
+                }
+                return dp[n];
+            }
+            public static void main(String args[]) {
+                System.out.println(wcd(4));
             }
         }
