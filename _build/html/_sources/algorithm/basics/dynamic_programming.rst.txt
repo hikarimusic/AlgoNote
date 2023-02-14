@@ -104,7 +104,8 @@ Longest Increasing Subsequence
         #include <bits/stdc++.h>
         using namespace std;
 
-        int lis(int arr[], int n) {
+        int lis(vector<int> arr) {
+            int n = arr.size();
             int dp[n] = {};
             for (int i=0; i<n; ++i) {
                 dp[i] = 1;
@@ -126,8 +127,8 @@ Longest Increasing Subsequence
         }
 
         int main() {
-            int arr[] = {10, 22, 9, 33, 21, 50, 41, 60};
-            cout << lis(arr, 8);
+            vector<int> arr{10, 22, 9, 33, 21, 50, 41, 60};
+            cout << lis(arr);
         }
 
     .. code-tab:: java
@@ -293,7 +294,8 @@ Minimum Partition
         # include <bits/stdc++.h>
         using namespace std;
 
-        int mp(int arr[], int n) {
+        int mp(vector<int> arr) {
+            int n = arr.size();
             int s = 0;
             for (int i=0; i<n; ++i) {
                 s += arr[i];
@@ -328,8 +330,8 @@ Minimum Partition
         }
 
         int main() {
-            int arr[] = {3, 1, 4, 2, 2, 1};
-            cout << mp(arr, 6);
+            vector<int> arr{3, 1, 4, 2, 2, 1};
+            cout << mp(arr);
         }
 
     .. code-tab:: java
@@ -432,5 +434,136 @@ Ways to Cover a Distance
             }
             public static void main(String args[]) {
                 System.out.println(wcd(4));
+            }
+        }
+
+Longest Path In Matrix
+------------------------
+
+:Time Complexity: :math:`O(N^2)`
+:Auxiliary Space: :math:`O(N^2)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def search(i, j, mat, dp):
+            if i<0 or i>len(mat) or j<0 or j>len(mat[0]): return 0
+            if dp[i][j] != -1: return dp[i][j]
+            x, y, z, w = 1, 1, 1, 1
+            if i>0 and mat[i-1][j]==mat[i][j]+1:
+                x = 1 + search(i-1, j, mat, dp)
+            if i<len(mat)-1 and mat[i+1][j]==mat[i][j]+1:
+                y = 1 + search(i+1, j, mat, dp)
+            if j>0 and mat[i][j-1]==mat[i][j]+1:
+                z = 1 + search(i, j-1, mat, dp)
+            if j<len(mat[0])-1 and mat[i][j+1]==mat[i][j]+1:
+                w = 1 + search(i, j+1, mat, dp)
+            dp[i][j] = max(x, y, z, w)
+            return dp[i][j]
+
+        def lpim(mat):
+            dp = [[-1 for j in range(len(mat[0]))] for i in range(len(mat))]
+            maxL = 1
+            for i in range(len(mat)):
+                for j in range(len(mat[0])):
+                    maxL = max(maxL, search(i, j, mat, dp))
+            return maxL
+
+        if __name__ == '__main__':
+            mat = [[1, 2, 9],
+                [5, 3, 8],
+                [4, 6, 7]]
+            print(lpim(mat))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int search(int i, int j, vector<vector<int>> mat, vector<vector<int>> dp) {
+            if (i<0 || i>mat.size() || j<0 || j>mat[0].size()) {
+                return 0;
+            }
+            if (dp[i][j] != -1) {
+                return dp[i][j];
+            }
+            int x=1, y=1, z=1, w=1;
+            if (i>0 && mat[i-1][j]==mat[i][j]+1) {
+                x = 1 + search(i-1, j, mat, dp);
+            }
+            if (i<mat.size()-1 && mat[i+1][j]==mat[i][j]+1) {
+                y = 1 + search(i+1, j, mat, dp);
+            }
+            if (j>0 && mat[i][j-1]==mat[i][j]+1) {
+                z = 1 + search(i, j-1, mat, dp);
+            }
+            if (j<mat[0].size()-1 && mat[i][j+1]==mat[i][j]+1) {
+                w = 1 + search(i, j+1, mat, dp);
+            }
+            dp[i][j] = max(x, max(y, max(z, w)));
+            return dp[i][j];
+        }
+
+        int lpim(vector<vector<int>> mat) {
+            vector<vector<int>> dp(mat.size(), vector<int> (mat[0].size(), -1));
+            int maxL = 1;
+            for (int i=0; i<mat.size(); ++i) {
+                for (int j=0; j<mat[0].size(); ++j) {
+                    maxL = max(maxL, search(i, j, mat, dp));
+                }
+            }
+            return maxL;
+        }
+
+        int main() {
+            vector<vector<int>> mat{{1, 2, 9}, {5, 3, 8}, {4, 6, 7}};
+            cout << lpim(mat);
+        }
+
+    .. code-tab:: java
+
+        class LPIM {
+            static int search(int i, int j, int mat[][], int dp[][]) {
+                if (i<0 || i>mat.length || j<0 || j>mat[0].length) {
+                    return 0;
+                }
+                if (dp[i][j] != -1) {
+                    return dp[i][j];
+                }
+                int x=1, y=1, z=1, w=1;
+                if (i>0 && mat[i-1][j]==mat[i][j]+1) {
+                    x = 1 + search(i-1, j, mat, dp);
+                }
+                if (i<mat.length-1 && mat[i+1][j]==mat[i][j]+1) {
+                    y = 1 + search(i+1, j, mat, dp);
+                }
+                if (j>0 && mat[i][j-1]==mat[i][j]+1) {
+                    z = 1 + search(i, j-1, mat, dp);
+                }
+                if (j<mat[0].length-1 && mat[i][j+1]==mat[i][j]+1) {
+                    w = 1 + search(i, j+1, mat, dp);
+                }
+                dp[i][j] = Math.max(x, Math.max(y, Math.max(z, w)));
+                return dp[i][j];
+            }
+            static int lpim(int mat[][]) {
+                int dp[][] = new int[mat.length][mat[0].length];
+                for (int i=0; i<mat.length; ++i) {
+                    for (int j=0; j<mat[0].length; ++j) {
+                        dp[i][j] = -1;
+                    }
+                }
+                int maxL = 1;
+                for (int i=0; i<mat.length; ++i) {
+                    for (int j=0; j<mat[0].length; ++j) {
+                        maxL = Math.max(maxL, search(i, j, mat, dp));
+                    }
+                }
+                return maxL;
+            }
+            public static void main(String args[]) {
+                int mat[][] = {{1, 2, 9}, {5, 3, 8}, {4, 6, 7}};
+                System.out.println(lpim(mat));
             }
         }
