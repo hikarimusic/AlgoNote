@@ -438,7 +438,7 @@ Ways to Cover a Distance
         }
 
 Longest Path In Matrix
-------------------------
+----------------------
 
 :Time Complexity: :math:`O(N^2)`
 :Auxiliary Space: :math:`O(N^2)`
@@ -565,5 +565,89 @@ Longest Path In Matrix
             public static void main(String args[]) {
                 int mat[][] = {{1, 2, 9}, {5, 3, 8}, {4, 6, 7}};
                 System.out.println(lpim(mat));
+            }
+        }
+
+Subset Sum Problem
+------------------
+
+:Time Complexity: :math:`N\times S`
+:Auxiliary Space: :math:`N\times S`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def sss(_set, _sum):
+            n, s = len(_set), _sum
+            dp = [[False for j in range(s+1)] for i in range(n+1)]
+            for i in range(n+1):
+                dp[i][0] = True
+            for i in range(1, n+1):
+                for j in range(1, s+1):
+                    if _set[i-1] <= j:
+                        dp[i][j] = dp[i-1][j] or dp[i-1][j-_set[i-1]]
+                    else:
+                        dp[i][j] = dp[i-1][j]
+            return dp[n][s]
+
+        if __name__ == '__main__':
+            _set = [3, 34, 4, 12, 5, 2]
+            _sum = 9
+            print(sss(_set, _sum))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        bool sss(vector<int> _set, int _sum) {
+            int n=_set.size(), s=_sum;
+            bool dp[n+1][s+1] = {};
+            for (int i=0; i<n+1; ++i) {
+                dp[i][0] = true;
+            }
+            for (int i=1; i<n+1; ++i) {
+                for (int j=1; j<s+1; ++j) {
+                    if (_set[i-1]<=j) {
+                        dp[i][j] = dp[i-1][j] || dp[i-1][j-_set[i-1]];
+                    } else {
+                        dp[i][j] = dp[i-1][j];
+                    }
+                }
+            }
+            return dp[n][s];
+        }
+
+        int main() {
+            vector<int> _set{3, 34, 4, 12, 5, 2}; 
+            int _sum = 9;
+            cout << sss(_set, _sum);
+        }
+
+    .. code-tab:: java
+
+        class SSS {
+            static boolean sss(int _set[], int _sum) {
+                int n=_set.length, s=_sum;
+                boolean dp[][] = new boolean[n+1][s+1];
+                for (int i=0; i<n+1; ++i) {
+                    dp[i][0] = true;
+                }
+                for (int i=1; i<n+1; ++i) {
+                    for (int j=1; j<s+1; ++j) {
+                        if (_set[i-1]<=j) {
+                            dp[i][j] = dp[i-1][j] || dp[i-1][j-_set[i-1]];
+                        } else {
+                            dp[i][j] = dp[i-1][j];
+                        }
+                    }
+                }
+                return dp[n][s];
+            }
+            public static void main(String args[]) {
+                int _set[] = {3, 34, 4, 12, 5, 2};
+                int _sum = 9;
+                System.out.println(sss(_set, _sum));
             }
         }

@@ -1,5 +1,5 @@
-**Basics**
-==========
+**DSA**
+=======
 
 .. toctree::
    :maxdepth: 2

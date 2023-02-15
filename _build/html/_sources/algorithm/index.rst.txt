@@ -7,4 +7,4 @@ so he tries not to be just a software engineer.
 .. toctree::
    :maxdepth: 2
 
-   basics/index
+   dsa/index
