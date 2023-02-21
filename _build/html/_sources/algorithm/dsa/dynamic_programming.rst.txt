@@ -4,22 +4,24 @@ Dynamic Programming
 Longest Common Subsequence 
 --------------------------
 
-:Time Complexity: :math:`O(M\times N)`
-:Auxiliary Space: :math:`O(M\times N)`
+:Time Complexity: :math:`O(N\times M)`
+:Auxiliary Space: :math:`O(N\times M)`
 
 .. tabs::
 
     .. code-tab:: python
 
         def lcs(X, Y):
-            dp = [[0 for j in range(len(Y)+1)] for i in range(len(X)+1)]
-            for i in range(1, len(X)+1):
-                for j in range(1, len(Y)+1):
+            n = len(X)
+            m = len(Y)
+            dp = [[0 for j in range(m+1)] for i in range(n+1)]
+            for i in range(1, n+1):
+                for j in range(1, m+1):
                     if X[i-1] == Y[j-1]:
                         dp[i][j] = dp[i-1][j-1] + 1
                     else:
                         dp[i][j] = max(dp[i-1][j], dp[i][j-1])
-            return dp[len(X)][len(Y)]
+            return dp[n][m]
 
         if __name__ == '__main__':
             X = "AGGTAB"
@@ -32,17 +34,19 @@ Longest Common Subsequence
         using namespace std;
 
         int lcs(string X, string Y) {
-            int dp[X.length()+1][Y.length()+1] = {};
-            for (int i=1; i<=X.length(); ++i) {
-                for (int j=1; j<=Y.length(); ++j) {
+            int n = X.length();
+            int m = Y.length();
+            int dp[n+1][m+1] = {};
+            for (int i=1; i<=n; ++i) {
+                for (int j=1; j<=m; ++j) {
                     if (X[i-1] == Y[j-1]) {
                         dp[i][j] = dp[i-1][j-1] + 1;
                     } else {
-                        dp[i][j] = (dp[i-1][j] > dp[i][j-1]) ? dp[i-1][j] : dp[i][j-1];
+                        dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
                     }
                 }
             }
-            return dp[X.length()][Y.length()];
+            return dp[n][m];
         }
 
         int main() {
@@ -55,17 +59,19 @@ Longest Common Subsequence
 
         class LCS {
             static int lcs(String X, String Y) {
-                int dp[][] = new int[X.length()+1][Y.length()+1];
-                for (int i=1; i<=X.length(); ++i) {
-                    for (int j=1; j<=Y.length(); ++j) {
+                int n = X.length();
+                int m = Y.length();
+                int dp[][] = new int[n+1][m+1];
+                for (int i=1; i<=n; ++i) {
+                    for (int j=1; j<=m; ++j) {
                         if (X.charAt(i-1) == Y.charAt(j-1)) {
                             dp[i][j] = dp[i-1][j-1] + 1;
                         } else {
-                            dp[i][j] = (dp[i-1][j] > dp[i][j-1]) ? dp[i-1][j] : dp[i][j-1];
+                            dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
                         }
                     }
                 }
-                return dp[X.length()][Y.length()];
+                return dp[n][m];
             }
             public static void main(String args[]) {
                 String X = "AGGTAB";
@@ -85,8 +91,9 @@ Longest Increasing Subsequence
     .. code-tab:: python
 
         def lis(arr):
-            dp = [1 for i in range(len(arr))]
-            for i in range(1, len(arr)):
+            n = len(arr)
+            dp = [1 for i in range(n)]
+            for i in range(1, n):
                 for j in range(0, i):
                     if arr[j] < arr[i] and dp[j]+1 > dp[i]:
                         dp[i] = dp[j] + 1
@@ -135,11 +142,12 @@ Longest Increasing Subsequence
 
         class LIS {
             static int lis(int arr[]) {
-                int dp[] = new int[arr.length];
-                for (int i=0; i<dp.length; ++i) {
+                int n = arr.length;
+                int dp[] = new int[n];
+                for (int i=0; i<n; ++i) {
                     dp[i] = 1;
                 }
-                for (int i=1; i<dp.length; ++i) {
+                for (int i=1; i<n; ++i) {
                     for (int j=0; j<i; ++j) {
                         if (arr[j]<arr[i] && dp[j]+1>dp[i]) {
                             dp[i] = dp[j] + 1;
@@ -147,7 +155,7 @@ Longest Increasing Subsequence
                     }
                 }
                 int maxL = 1;
-                for (int i=0; i<dp.length; ++i) {
+                for (int i=0; i<n; ++i) {
                     if (dp[i] > maxL) {
                         maxL = dp[i];
                     }
@@ -163,26 +171,28 @@ Longest Increasing Subsequence
 Edit Distance
 -------------
 
-:Time Complexity: :math:`O(M\times N)`
-:Auxiliary Space: :math:`O(M\times N)`
+:Time Complexity: :math:`O(N\times M)`
+:Auxiliary Space: :math:`O(N\times M)`
 
 .. tabs::
 
     .. code-tab:: python
 
         def ed(X, Y):
-            dp = [[0 for j in range(len(Y)+1)] for i in range(len(X)+1)]
-            for i in range(len(X)+1):
+            n = len(X)
+            m = len(Y)
+            dp = [[0 for j in range(m+1)] for i in range(n+1)]
+            for i in range(n+1):
                 dp[i][0] = i
-            for j in range(len(Y)+1):
+            for j in range(m+1):
                 dp[0][j] = j
-            for i in range(1, len(X)+1):
-                for j in range(1, len(Y)+1):
+            for i in range(1, n+1):
+                for j in range(1, m+1):
                     if X[i-1] == Y[j-1]:
                         dp[i][j] = dp[i-1][j-1]
                     else:
                         dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1
-            return dp[len(X)][len(Y)]
+            return dp[n][m]
 
         if __name__ == '__main__':
             X = "sunday"
@@ -199,15 +209,17 @@ Edit Distance
         }
 
         int ed(string X, string Y) {
-            int dp[X.length()+1][Y.length()+1] = {};
-            for (int i=0; i<=X.length(); ++i) {
+            int n = X.length();
+            int m = Y.length();
+            int dp[n+1][m+1] = {};
+            for (int i=0; i<=n; ++i) {
                 dp[i][0] = i;
             }
-            for (int j=0; j<=Y.length(); ++j) {
+            for (int j=0; j<=m; ++j) {
                 dp[0][j] = j;
             }
-            for (int i=1; i<=X.length(); ++i) {
-                for (int j=1; j<=Y.length(); ++j) {
+            for (int i=1; i<=n; ++i) {
+                for (int j=1; j<=m; ++j) {
                     if (X[i-1]==Y[j-1]) {
                         dp[i][j] = dp[i-1][j-1];
                     } else {
@@ -215,7 +227,7 @@ Edit Distance
                     }
                 }
             }
-            return dp[X.length()][Y.length()];
+            return dp[n][m];
         }
 
         int main() {
@@ -231,15 +243,17 @@ Edit Distance
                 return Math.min(x, Math.min(y, z));
             }
             static int ed(String X, String Y) {
-                int dp[][] = new int[X.length()+1][Y.length()+1];
-                for (int i=0; i<=X.length(); ++i) {
+                int n = X.length();
+                int m = Y.length();
+                int dp[][] = new int[n+1][m+1];
+                for (int i=0; i<=n; ++i) {
                     dp[i][0] = i;
                 }
-                for (int j=0; j<Y.length(); ++j) {
+                for (int j=0; j<m; ++j) {
                     dp[0][j] = j;
                 }
-                for (int i=1; i<=X.length(); ++i) {
-                    for (int j=1; j<=Y.length(); ++j) {
+                for (int i=1; i<=n; ++i) {
+                    for (int j=1; j<=m; ++j) {
                         if (X.charAt(i-1)==Y.charAt(j-1)) {
                             dp[i][j] = dp[i-1][j-1];
                         } else {
@@ -247,7 +261,7 @@ Edit Distance
                         }
                     }
                 }
-                return dp[X.length()][Y.length()];
+                return dp[n][m];
             }
             public static void main(String args[]) {
                 String X = "sunday";
@@ -305,8 +319,6 @@ Minimum Partition
                 for (int j=0; j<s+1; ++j) {
                     if (j == 0) {
                         dp[i][j] = true;
-                    } else {
-                        dp[i][j] = false;
                     }
                 }
             }
@@ -348,8 +360,6 @@ Minimum Partition
                     for (int j=0; j<s+1; ++j) {
                         if (j == 0) {
                             dp[i][j] = true;
-                        } else {
-                            dp[i][j] = false;
                         }
                     }
                 }
@@ -440,8 +450,8 @@ Ways to Cover a Distance
 Longest Path In Matrix
 ----------------------
 
-:Time Complexity: :math:`O(N^2)`
-:Auxiliary Space: :math:`O(N^2)`
+:Time Complexity: :math:`O(N\times M)`
+:Auxiliary Space: :math:`O(N\times M)`
 
 .. tabs::
 
@@ -463,10 +473,12 @@ Longest Path In Matrix
             return dp[i][j]
 
         def lpim(mat):
-            dp = [[-1 for j in range(len(mat[0]))] for i in range(len(mat))]
+            n = len(mat)
+            m = len(mat[0])
+            dp = [[-1 for j in range(m)] for i in range(n)]
             maxL = 1
-            for i in range(len(mat)):
-                for j in range(len(mat[0])):
+            for i in range(n):
+                for j in range(m):
                     maxL = max(maxL, search(i, j, mat, dp))
             return maxL
 
@@ -506,10 +518,12 @@ Longest Path In Matrix
         }
 
         int lpim(vector<vector<int>> mat) {
-            vector<vector<int>> dp(mat.size(), vector<int> (mat[0].size(), -1));
+            int n = mat.size();
+            int m = mat[0].size();
+            vector<vector<int>> dp(n, vector<int> (m, -1));
             int maxL = 1;
-            for (int i=0; i<mat.size(); ++i) {
-                for (int j=0; j<mat[0].size(); ++j) {
+            for (int i=0; i<n; ++i) {
+                for (int j=0; j<m; ++j) {
                     maxL = max(maxL, search(i, j, mat, dp));
                 }
             }
@@ -548,15 +562,17 @@ Longest Path In Matrix
                 return dp[i][j];
             }
             static int lpim(int mat[][]) {
-                int dp[][] = new int[mat.length][mat[0].length];
-                for (int i=0; i<mat.length; ++i) {
-                    for (int j=0; j<mat[0].length; ++j) {
+                int n = mat.length;
+                int m = mat[0].length;
+                int dp[][] = new int[n][m];
+                for (int i=0; i<n; ++i) {
+                    for (int j=0; j<m; ++j) {
                         dp[i][j] = -1;
                     }
                 }
                 int maxL = 1;
-                for (int i=0; i<mat.length; ++i) {
-                    for (int j=0; j<mat[0].length; ++j) {
+                for (int i=0; i<n; ++i) {
+                    for (int j=0; j<m; ++j) {
                         maxL = Math.max(maxL, search(i, j, mat, dp));
                     }
                 }
@@ -579,7 +595,8 @@ Subset Sum Problem
     .. code-tab:: python
 
         def sss(_set, _sum):
-            n, s = len(_set), _sum
+            n = len(_set)
+            s = _sum
             dp = [[False for j in range(s+1)] for i in range(n+1)]
             for i in range(n+1):
                 dp[i][0] = True
@@ -602,7 +619,8 @@ Subset Sum Problem
         using namespace std;
 
         bool sss(vector<int> _set, int _sum) {
-            int n=_set.size(), s=_sum;
+            int n=_set.size();
+            int s=_sum;
             bool dp[n+1][s+1] = {};
             for (int i=0; i<n+1; ++i) {
                 dp[i][0] = true;
@@ -629,7 +647,8 @@ Subset Sum Problem
 
         class SSS {
             static boolean sss(int _set[], int _sum) {
-                int n=_set.length, s=_sum;
+                int n=_set.length;
+                int s=_sum;
                 boolean dp[][] = new boolean[n+1][s+1];
                 for (int i=0; i<n+1; ++i) {
                     dp[i][0] = true;
@@ -649,5 +668,106 @@ Subset Sum Problem
                 int _set[] = {3, 34, 4, 12, 5, 2};
                 int _sum = 9;
                 System.out.println(sss(_set, _sum));
+            }
+        }
+
+Optimal Strategy for a Game
+---------------------------
+
+:Time Complexity: :math:`N^2`
+:Auxiliary Space: :math:`N^2`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def osg(arr):
+            n = len(arr)
+            dp = [[0 for i in range(n)] for j in range(n)]
+            for j in range(n):
+                i = j
+                dp[i][j] = arr[i]
+            for j in range(1, n):
+                i = j - 1
+                dp[i][j] = max(arr[i], arr[j])
+            for g in range(2, n):
+                for j in range(g, n):
+                    i = j - g
+                    dp[i][j] = max(arr[i]+min(dp[i+2][j], dp[i+1][j-1]), arr[j]+min(dp[i+1][j-1], dp[i][j-2]))
+            return dp[0][n-1]
+
+        if __name__ == '__main__':
+            arr1 = [8, 15, 3, 7]
+            print(osg(arr1))
+            arr2 = [2, 2, 2, 2]
+            print(osg(arr2))
+            arr3 = [20, 30, 2, 2, 2, 10]
+            print(osg(arr3))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int osg(vector<int> arr) {
+            int n = arr.size();
+            int dp[n][n];
+            int i;
+            for (int j=0; j<n; ++j) {
+                i = j;
+                dp[i][j] = arr[i];
+            }
+            for (int j=1; j<n; ++j) {
+                i = j - 1;
+                dp[i][j] = max(arr[i], arr[j]);
+            }
+            for (int g=2; g<n; ++g) {
+                for (int j=g; j<n; ++j) {
+                    i = j - g;
+                    dp[i][j] = max(arr[i]+min(dp[i+2][j], dp[i+1][j-1]), arr[j]+min(dp[i+1][j-1], dp[i][j-2]));
+                }
+            }
+            return dp[0][n-1];
+        }
+
+        int main() {
+            vector<int> arr1{8, 15, 3, 7};
+            cout << osg(arr1) << endl;
+            vector<int> arr2{2, 2, 2, 2};
+            cout << osg(arr2) << endl;
+            vector<int> arr3{20, 30, 2, 2, 2, 10};
+            cout << osg(arr3) << endl;
+        }
+
+    .. code-tab:: java
+
+        class OSG {
+            static int osg(int arr[]) {
+                int n = arr.length;
+                int dp[][] = new int[n][n];
+                int i;
+                for (int j=0; j<n; ++j) {
+                    i = j;
+                    dp[i][j] = arr[i];
+                }
+                for (int j=1; j<n; ++j) {
+                    i = j - 1;
+                    dp[i][j] = Math.max(arr[i], arr[j]);
+                }
+                for (int g=2; g<n; ++g) {
+                    for (int j=g; j<n; ++j) {
+                        i = j - g;
+                        dp[i][j] = Math.max(arr[i]+Math.min(dp[i+2][j], dp[i+1][j-1]), arr[j]+Math.min(dp[i+1][j-1], dp[i][j-2]));
+                    }
+                }
+                return dp[0][n-1];
+            }
+            public static void main(String args[]) {
+                int arr1[] = {8, 15, 3, 7};
+                System.out.println(osg(arr1));
+                int arr2[] = {2, 2, 2, 2};
+                System.out.println(osg(arr2));
+                int arr3[] = {20, 30, 2, 2, 2, 10};
+                System.out.println(osg(arr3));
             }
         }
