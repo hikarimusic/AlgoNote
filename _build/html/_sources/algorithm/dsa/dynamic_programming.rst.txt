@@ -587,8 +587,8 @@ Longest Path In Matrix
 Subset Sum Problem
 ------------------
 
-:Time Complexity: :math:`N\times S`
-:Auxiliary Space: :math:`N\times S`
+:Time Complexity: :math:`O(N\times S)`
+:Auxiliary Space: :math:`O(N\times S)`
 
 .. tabs::
 
@@ -674,8 +674,8 @@ Subset Sum Problem
 Optimal Strategy for a Game
 ---------------------------
 
-:Time Complexity: :math:`N^2`
-:Auxiliary Space: :math:`N^2`
+:Time Complexity: :math:`O(N^2)`
+:Auxiliary Space: :math:`O(N^2)`
 
 .. tabs::
 
@@ -683,7 +683,7 @@ Optimal Strategy for a Game
 
         def osg(arr):
             n = len(arr)
-            dp = [[0 for i in range(n)] for j in range(n)]
+            dp = [[0 for j in range(n)] for i in range(n)]
             for j in range(n):
                 i = j
                 dp[i][j] = arr[i]
@@ -769,5 +769,84 @@ Optimal Strategy for a Game
                 System.out.println(osg(arr2));
                 int arr3[] = {20, 30, 2, 2, 2, 10};
                 System.out.println(osg(arr3));
+            }
+        }
+
+0-1 Knapsack Problem 
+--------------------
+
+:Time Complexity: :math:`O(N\times W)`
+:Auxiliary Space: :math:`O(N\times W)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def kp01(val, wt, w):
+            n = len(val)
+            dp = [[0 for j in range(w+1)] for i in range(n+1)]
+            for i in range(1, n+1):
+                for j in range(1, w+1):
+                    if wt[i-1] <= j:
+                        dp[i][j] = max(dp[i-1][j], val[i-1]+dp[i-1][j-wt[i-1]])
+                    else:
+                        dp[i][j] = dp[i-1][j]
+            return dp[n][w]
+
+        if __name__ == '__main__':
+            val = [60, 100, 120]
+            wt = [10, 20, 30]
+            w = 50
+            print(kp01(val, wt, w))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int kp01(vector<int> val, vector<int> wt, int w) {
+            int n = val.size();
+            int dp[n+1][w+1] = {};
+            for (int i=1; i<=n; ++i) {
+                for (int j=1; j<=w; ++j) {
+                    if  (wt[i-1]<=j) {
+                        dp[i][j] = max(dp[i-1][j], val[i-1]+dp[i-1][j-wt[i-1]]);
+                    } else {
+                        dp[i][j] = dp[i-1][j];
+                    }
+                }
+            }
+            return dp[n][w];
+        }
+
+        int main() {
+            vector<int> val{60, 100, 120};
+            vector<int> wt{10, 20, 30};
+            int w = 50;
+            cout << kp01(val, wt, w);
+        }
+
+    .. code-tab:: java
+
+        class KP01 {
+            static int kp01(int val[], int wt[], int w) {
+                int n = val.length;
+                int dp[][] = new int[n+1][w+1];
+                for (int i=1; i<=n; ++i) {
+                    for (int j=1; j<=w; ++j) {
+                        if (wt[i-1]<=j) {
+                            dp[i][j] = Math.max(dp[i-1][j], val[i-1]+dp[i-1][j-wt[i-1]]);
+                        } else {
+                            dp[i][j] = dp[i-1][j];
+                        }
+                    }
+                }
+                return dp[n][w];
+            }
+            public static void main(String args[]) {
+                int val[] = {60, 100, 120};
+                int wt[] = {10, 20, 30};
+                int w = 50;
+                System.out.println(kp01(val, wt, w));
             }
         }
