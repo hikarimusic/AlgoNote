@@ -850,3 +850,130 @@ Optimal Strategy for a Game
                 System.out.println(kp01(val, wt, w));
             }
         }
+
+Boolean Parenthesization Problem
+--------------------------------
+
+:Time Complexity: :math:`O(N^3)`
+:Auxiliary Space: :math:`O(N^2)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def bpp(symb, oper):
+            n = len(symb)
+            T = [[0 for j in range(n)] for i in range(n)]
+            F = [[0 for j in range(n)] for i in range(n)]
+            for i in range(n):
+                if symb[i] == 'T':
+                    T[i][i] = 1
+                    F[i][i] = 0
+                elif symb[i] == 'F':
+                    T[i][i] = 0
+                    F[i][i] = 1
+            for g in range(1, n):
+                for j in range(g, n):
+                    i = j - g
+                    for k in range(i, j):
+                        if oper[k] == '&':
+                            T[i][j] += T[i][k] * T[k+1][j]
+                            F[i][j] += F[i][k] * F[k+1][j] + F[i][k] * T[k+1][j] + T[i][k] * F[k+1][j]
+                        elif oper[k] == '|':
+                            T[i][j] += F[i][k] * T[k+1][j] + T[i][k] * F[k+1][j] + T[i][k] * T[k+1][j]
+                            F[i][j] += F[i][k] * F[k+1][j]
+                        elif oper[k] == '^':
+                            T[i][j] += F[i][k] * T[k+1][j] + T[i][k] * F[k+1][j]
+                            F[i][j] += F[i][k] * F[k+1][j] + T[i][k] * T[k+1][j]
+            return T[0][n-1]
+
+        if __name__ == '__main__':
+            symb = "TTFT"
+            oper = "|&^"
+            print(bpp(symb, oper))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int bpp(string symb, string oper) {
+            int n = symb.length();
+            int T[n][n] = {};
+            int F[n][n] = {};
+            for (int i=0; i<n; ++i) {
+                if (symb[i] == 'T') {
+                    T[i][i] = 1;
+                    F[i][i] = 0;
+                } else if (symb[i] == 'F') {
+                    T[i][i] = 0;
+                    F[i][i] = 1;
+                }
+            }
+            for (int g=1; g<n; ++g) {
+                for (int j=g; j<n; ++j) {
+                    int i = j - g;
+                    for (int k=i; k<j; ++k) {
+                        if (oper[k] == '&') {
+                            T[i][j] += T[i][k] * T[k+1][j];
+                            F[i][j] += F[i][k] * F[k+1][j] + F[i][k] * T[k+1][j] + T[i][k] * F[k+1][j];
+                        } else if (oper[k] == '|') {
+                            T[i][j] += F[i][k] * T[k+1][j] + T[i][k] * F[k+1][j] + T[i][k] * T[k+1][j];
+                            F[i][j] += F[i][k] * F[k+1][j];
+                        } else if (oper[k] == '^') {
+                            T[i][j] += F[i][k] * T[k+1][j] + T[i][k] * F[k+1][j];
+                            F[i][j] += F[i][k] * F[k+1][j] + T[i][k] * T[k+1][j];
+                        }
+                    }
+                }
+            }
+            return T[0][n-1];
+        }
+
+        int main() {
+            string symb = "TTFT";
+            string oper = "|&^";
+            cout << bpp(symb, oper);
+        }
+
+    .. code-tab:: java
+
+        class BPP {
+            static int bpp(String symb, String oper) {
+                int n = symb.length();
+                int T[][] = new int[n][n];
+                int F[][] = new int[n][n];
+                for (int i=0; i<n; ++i) {
+                    if (symb.charAt(i) == 'T') {
+                        T[i][i] = 1;
+                        F[i][i] = 0;
+                    } else if (symb.charAt(i) == 'F') {
+                        T[i][i] = 0;
+                        F[i][i] = 1;
+                    }
+                }
+                for (int g=1; g<n; ++g) {
+                    for (int j=g; j<n; ++j) {
+                        int i = j - g;
+                        for (int k=i; k<j; ++k) {
+                            if (oper.charAt(k) == '&') {
+                                T[i][j] += T[i][k] * T[k+1][j];
+                                F[i][j] += F[i][k] * F[k+1][j] + F[i][k] * T[k+1][j] + T[i][k] * F[k+1][j];
+                            } else if (oper.charAt(k) == '|'){
+                                T[i][j] += F[i][k] * T[k+1][j] + T[i][k] * F[k+1][j] + T[i][k] * T[k+1][j];
+                                F[i][j] += F[i][k] * F[k+1][j];
+                            } else if (oper.charAt(k) == '^') {
+                                T[i][j] += F[i][k] * T[k+1][j] + T[i][k] * F[k+1][j];
+                                F[i][k] += F[i][k] * F[k+1][j] + T[i][k] * T[k+1][j];
+                            }
+                        }
+                    }
+                }
+                return T[0][n-1];
+            }
+            public static void main(String args[]) {
+                String symb = "TTFT";;
+                String oper = "|&^";
+                System.out.println(bpp(symb, oper));
+            }
+        }
