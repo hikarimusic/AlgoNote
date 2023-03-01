@@ -1072,3 +1072,76 @@ Shortest Common Supersequence
                 System.out.println(scs(X, Y));
             }
         }
+
+Matrix Chain Multiplication
+---------------------------
+
+:Time Complexity: :math:`O(N^3)`
+:Auxiliary Space: :math:`O(N^2)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def mcm(arr):
+            n = len(arr) - 1
+            dp = [[0 for j in range(n)] for i in range(n)]
+            for g in range(1, n):
+                for j in range(g, n):
+                    i = j - g
+                    dp[i][j] = float('inf')
+                    for k in range(i, j):
+                        dp[i][j] = min(dp[i][j], dp[i][k] + dp[k+1][j] + arr[i] * arr[k+1] * arr[j+1])
+            return dp[0][n-1]
+
+        if __name__ == '__main__':
+            arr = [1, 2, 3, 4]
+            print(mcm(arr))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int mcm(vector<int> arr) {
+            int n = arr.size() - 1;
+            int dp[n][n] = {};
+            for (int g=1; g<n; ++g) {
+                for (int j=g; j<n; ++j) {
+                    int i = j - g;
+                    dp[i][j] = INT_MAX;
+                    for (int k=i; k<j; ++k) {
+                        dp[i][j] = min(dp[i][j], dp[i][k] + dp[k+1][j] + arr[i] * arr[k+1] * arr[j+1]);
+                    }
+                }
+            }
+            return dp[0][n-1];
+        }
+
+        int main() {
+            vector<int> arr{1, 2, 3, 4};
+            cout << mcm(arr);
+        }
+
+    .. code-tab:: java
+
+        class MCM {
+            static int mcm(int arr[]) {
+                int n = arr.length - 1;
+                int dp[][] = new int[n][n];
+                for (int g=1; g<n; ++g) {
+                    for (int j=g; j<n; ++j) {
+                        int i = j - g;
+                        dp[i][j] = Integer.MAX_VALUE;
+                        for (int k=i; k<j; ++k) {
+                            dp[i][j] = Math.min(dp[i][j], dp[i][k] + dp[k+1][j] + arr[i] * arr[k+1] * arr[j+1]);
+                        }
+                    }
+                }
+                return dp[0][n-1];
+            }
+            public static void main(String args[]) {
+                int arr[] = {1, 2, 3, 4};
+                System.out.println(mcm(arr));
+            }
+        }
