@@ -1243,3 +1243,76 @@ Partition Problem
                 System.out.println(pp(arr));
             }
         }
+
+Rod Cutting
+-----------
+
+:Time Complexity: :math:`O(N^2)`
+:Auxiliary Space: :math:`O(N^2)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def rc(price):
+            n = len(price)
+            dp = [[0 for j in range(n+1)] for i in range(n+1)]
+            for i in range(1, n+1):
+                for j in range(1, n+1):
+                    if i <= j:
+                        dp[i][j] = max(dp[i-1][j], dp[i-1][j-i] + price[i-1])
+                    else:
+                        dp[i][j] = dp[i-1][j]
+            return dp[n][n]
+
+        if __name__ == '__main__':
+            price = [1, 5, 8, 9, 10, 17, 17, 20]
+            print(rc(price))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int rc(vector<int> price) {
+            int n = price.size();
+            int dp[n+1][n+1] = {};
+            for (int i=1; i<=n; ++i) {
+                for (int j=1; j<=n; ++j) {
+                    if (i <= j) {
+                        dp[i][j] = max(dp[i-1][j], dp[i-1][j-i] + price[i-1]);
+                    } else {
+                        dp[i][j] = dp[i-1][j];
+                    }
+                }
+            }
+            return dp[n][n];
+        }
+
+        int main() {
+            vector<int> price{1, 5, 8, 9, 10, 17, 17, 20};
+            cout << rc(price);
+        }
+
+    .. code-tab:: java
+
+        class RC {
+            static int rc(int price[]) {
+                int n = price.length;
+                int dp[][] = new int[n+1][n+1];
+                for (int i=1; i<=n; ++i) {
+                    for (int j=1; j<=n; ++j) {
+                        if (i <= j) {
+                            dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-i] + price[i-1]);
+                        } else {
+                            dp[i][j] = dp[i-1][j];
+                        }
+                    }
+                }
+                return dp[n][n];
+            }
+            public static void main(String args[]) {
+                int price[] = {1, 5, 8, 9, 10, 17, 17, 20};
+                System.out.println(rc(price));
+            }
+        }
