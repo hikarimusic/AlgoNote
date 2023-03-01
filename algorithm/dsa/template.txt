@@ -1,0 +1,18 @@
+Problem
+-------
+
+:Time Complexity: :math:`O(N)`
+:Auxiliary Space: :math:`O(N)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+
+
+    .. code-tab:: cpp
+
+
+
+    .. code-tab:: java
+

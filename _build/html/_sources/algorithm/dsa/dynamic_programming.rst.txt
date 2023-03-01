@@ -977,3 +977,98 @@ Boolean Parenthesization Problem
                 System.out.println(bpp(symb, oper));
             }
         }
+
+Shortest Common Supersequence
+-----------------------------
+
+:Time Complexity: :math:`O(N\times M)`
+:Auxiliary Space: :math:`O(N\times M)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def scs(X, Y):
+            n = len(X)
+            m = len(Y)
+            dp = [[0 for j in range(m+1)] for i in range(n+1)]
+            for i in range(1, n+1):
+                dp[i][0] = i
+            for j in range(1, m+1):
+                dp[0][j] = j
+            for i in range(1, n+1):
+                for j in range(1, m+1):
+                    if X[i-1] == Y[j-1]:
+                        dp[i][j] = dp[i-1][j-1] + 1
+                    else:
+                        dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + 1
+            return dp[n][m]
+
+        if __name__ == '__main__':
+            X = "AGGTAB"
+            Y = "GXTXAYB"
+            print(scs(X, Y))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int scs(string X, string Y) {
+            int n = X.length();
+            int m = Y.length();
+            int dp[n+1][m+1] = {};
+            for (int i=1; i<=n; ++i) {
+                dp[i][0] = i;
+            }
+            for (int j=1; j<=m; ++j) {
+                dp[0][j] = j;
+            }
+            for (int i=1; i<=n; ++i) {
+                for (int j=1; j<=m; ++j) {
+                    if (X[i-1] == Y[j-1]) {
+                        dp[i][j] = dp[i-1][j-1] + 1;
+                    } else {
+                        dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + 1;
+                    }
+                }
+            }
+            return dp[n][m];
+        }
+
+        int main() {
+            string X = "AGGTAB";
+            string Y = "GXTXAYB";
+            cout << scs(X, Y);
+        }
+
+    .. code-tab:: java
+
+        class SCS {
+            static int scs(String X, String Y) {
+                int n = X.length();
+                int m = Y.length();
+                int dp[][] = new int[n+1][m+1];
+                for (int i=1; i<=n; ++i) {
+                    dp[i][0] = i;
+                }
+                for (int j=1; j<=m; ++j) {
+                    dp[0][j] = j;
+                }
+                for (int i=1; i<=n; ++i) {
+                    for (int j=1; j<=m; ++j) {
+                        if (X.charAt(i-1) == Y.charAt(j-1)) {
+                            dp[i][j] = dp[i-1][j-1] + 1;
+                        } else {
+                            dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1]) + 1;
+                        }
+                    }
+                }
+                return dp[n][m];
+            }
+            public static void main(String args[]) {
+                String X = "AGGTAB";
+                String Y = "GXTXAYB";
+                System.out.println(scs(X, Y));
+            }
+        }
