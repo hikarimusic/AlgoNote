@@ -311,8 +311,8 @@ Minimum Partition
         int mp(vector<int> arr) {
             int n = arr.size();
             int s = 0;
-            for (int i=0; i<n; ++i) {
-                s += arr[i];
+            for (int a : arr) {
+                s += a;
             }
             bool dp[n+1][s+1] = {};
             for (int i=0; i<n+1; ++i) {
@@ -1143,5 +1143,103 @@ Matrix Chain Multiplication
             public static void main(String args[]) {
                 int arr[] = {1, 2, 3, 4};
                 System.out.println(mcm(arr));
+            }
+        }
+
+Partition Problem
+-----------------
+
+:Time Complexity: :math:`O(N\times S)`
+:Auxiliary Space: :math:`O(N\times S)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def pp(arr):
+            n = len(arr)
+            s = sum(arr)
+            if s % 2 == 1:
+                return False
+            dp = [[False for j in range(s//2+1)] for i in range(n+1)]
+            for i in range(n+1):
+                dp[i][0] = True
+            for i in range(1, n+1):
+                for j in range(1, s//2+1):
+                    if arr[i-1] <= j:
+                        dp[i][j] = dp[i-1][j] or dp[i-1][j-arr[i-1]]
+                    else:
+                        dp[i][j] = dp[i-1][j]
+            return dp[n][s//2]
+
+        if __name__ == '__main__':
+            arr = [3, 1, 1, 2, 2, 1]
+            print(pp(arr))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int pp(vector<int> arr) {
+            int n = arr.size();
+            int s = 0;
+            for (int a : arr) {
+                s += a;
+            }
+            if (s % 2 == 1) {
+                return false;
+            }
+            bool dp[n+1][s/2+1] = {};
+            for (int i=0; i<=n; ++i) {
+                dp[i][0] = true;
+            }
+            for (int i=1; i<=n; ++i) {
+                for (int j=1; j<=s/2; ++j) {
+                    if (arr[i-1] <= j) {
+                        dp[i][j] = dp[i-1][j] || dp[i-1][j-arr[i-1]];
+                    } else {
+                        dp[i][j] = dp[i-1][j];
+                    }
+                }
+            }
+            return dp[n][s/2];
+        }
+
+        int main() {
+            vector<int> arr{3, 1, 1, 2, 2, 1};
+            cout << pp(arr);
+        }
+
+    .. code-tab:: java
+
+        class PP {
+            static boolean pp(int arr[]) {
+                int n = arr.length;
+                int s = 0;
+                for (int a : arr) {
+                    s += a;
+                }
+                if (s % 2 == 1) {
+                    return false;
+                }
+                boolean dp[][] = new boolean[n+1][s/2+1];
+                for (int i=0; i<=n; ++i) {
+                    dp[i][0] = true;
+                }
+                for (int i=1; i<=n; ++i) {
+                    for (int j=1; j<=s/2; ++j) {
+                        if (arr[i-1] <= j) {
+                            dp[i][j] = dp[i-1][j] || dp[i-1][j-arr[i-1]];
+                        } else {
+                            dp[i][j] = dp[i-1][j];
+                        }
+                    }
+                }
+                return dp[n][s/2];
+            }
+            public static void main(String args[]) {
+                int arr[] = {3, 1, 1, 2, 2, 1};
+                System.out.println(pp(arr));
             }
         }
