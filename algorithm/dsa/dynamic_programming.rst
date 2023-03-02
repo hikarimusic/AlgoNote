@@ -1316,3 +1316,201 @@ Rod Cutting
                 System.out.println(rc(price));
             }
         }
+
+Coin Change Proplem
+-------------------
+
+:Time Complexity: :math:`O(N\times S)`
+:Auxiliary Space: :math:`O(N\times S)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def ccp(coin, _sum):
+            n = len(coin)
+            s = _sum
+            dp = [[0 for j in range(s+1)] for i in range(n+1)]
+            for i in range(1, n+1):
+                dp[i][0] = 1
+            for i in range(1, n+1):
+                for j in range(1, s+1):
+                    if coin[i-1] <= j:
+                        dp[i][j] = dp[i-1][j] + dp[i][j-coin[i-1]]
+                    else:
+                        dp[i][j] = dp[i-1][j]
+            return dp[n][s]
+
+        if __name__ == '__main__':
+            coin = [1, 2, 3]
+            _sum = 4
+            print(ccp(coin, _sum))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int ccp(vector<int> coin, int _sum) {
+            int n = coin.size();
+            int s = _sum;
+            int dp[n+1][s+1] = {};
+            for (int i=1; i<=n; ++i) {
+                dp[i][0] = 1;
+            }
+            for (int i=1; i<=n; ++i) {
+                for (int j=1; j<=s; ++j) {
+                    if (coin[i-1] <= j) {
+                        dp[i][j] = dp[i-1][j] + dp[i][j-coin[i-1]];
+                    } else {
+                        dp[i][j] = dp[i-1][j];
+                    }
+                }
+            }
+            return dp[n][s];
+        }
+
+        int main() {
+            vector<int> coin{1, 2, 3};
+            int _sum = 4;
+            cout << ccp(coin, _sum);
+        }
+
+    .. code-tab:: java
+
+        class CCP {
+            static int ccp(int coin[], int _sum) {
+                int n = coin.length;
+                int s = _sum;
+                int dp[][] = new int[n+1][s+1];
+                for (int i=1; i<=n; ++i) {
+                    dp[i][0] = 1;
+                }
+                for (int i=1; i<=n; ++i) {
+                    for (int j=1; j<=s; ++j) {
+                        if (coin[i-1] <= j) {
+                            dp[i][j] = dp[i-1][j] + dp[i][j-coin[i-1]];
+                        } else {
+                            dp[i][j] = dp[i-1][j];
+                        }
+                    }
+                }
+                return dp[n][s];
+            }
+            public static void main(String args[]) {
+                int coin[] = {1, 2, 3};
+                int _sum = 4;
+                System.out.println(ccp(coin, _sum));
+            }
+        }
+
+Word Break Problem
+------------------
+
+:Time Complexity: :math:`O(N^2)`
+:Auxiliary Space: :math:`O(N^2)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def wordin(w, _dict):
+            for d in _dict:
+                if w == d:
+                    return True
+            return False
+
+        def wbp(s, _dict):
+            n = len(s)
+            dp = [False for i in range(n+1)]
+            dp[0] = True
+            for i in range(1, n+1):
+                for j in range(i):
+                    if dp[j] == True and wordin(s[j:i], _dict):
+                        dp[i] = True
+                        break
+            return dp[n]
+
+        if __name__ == '__main__':
+            _dict = ["mobile","samsung","sam","sung","man","mango","icecream","and","go","i","like","ice","cream"]
+            print(wbp("ilikesamsung", _dict))
+            print(wbp("iiiiiiii", _dict))
+            print(wbp("", _dict))
+            print(wbp("ilikelikeimangoiii", _dict))
+            print(wbp("samsungandmango", _dict))
+            print(wbp("samsungandmangok", _dict))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        bool wordin(string w, vector<string> _dict) {
+            for (string d : _dict) {
+                if (w == d) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool wbp(string s, vector<string> _dict) {
+            int n = s.length();
+            bool dp[n+1] = {};
+            dp[0] = true;
+            for (int i=1; i<=n; ++i) {
+                for (int j=0; j<i; ++j) {
+                    if (dp[j] && wordin(s.substr(j, i-j), _dict)) {
+                        dp[i] = true;
+                        break;
+                    }
+                }
+            }
+            return dp[n];
+        }
+
+        int main() {
+            vector<string> _dict{"mobile","samsung","sam","sung","man","mango","icecream","and","go","i","like","ice","cream"};
+            cout << wbp("ilikesamsung", _dict) << endl;
+            cout << wbp("iiiiiiii", _dict) << endl;
+            cout << wbp("", _dict) << endl;
+            cout << wbp("ilikelikeimangoiii", _dict) << endl;
+            cout << wbp("samsungandmango", _dict) << endl;
+            cout << wbp("samsungandmangok", _dict) << endl;
+        }
+
+    .. code-tab:: java
+
+        class WBP {
+            static boolean wordin(String w, String _dict[]) {
+                for (String d : _dict) {
+                    if (w.equals(d)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            static boolean wbp(String s, String _dict[]) {
+                int n = s.length();
+                boolean dp[] = new boolean[n+1];
+                dp[0] = true;
+                for (int i=1; i<=n; ++i) {
+                    for (int j=0; j<i; ++j) {
+                        if (dp[j] && wordin(s.substring(j, i), _dict)) {
+                            dp[i] = true;
+                            break;  
+                        }
+                    }
+                }
+                return dp[n];
+            }
+            public static void main(String args[]) {
+                String _dict[] = {"mobile","samsung","sam","sung","man","mango","icecream","and","go","i","like","ice","cream"};
+                System.out.println(wbp("ilikesamsung", _dict));
+                System.out.println(wbp("iiiiiiii", _dict));
+                System.out.println(wbp("", _dict));
+                System.out.println(wbp("ilikelikeimangoiii", _dict));
+                System.out.println(wbp("samsungandmango", _dict));
+                System.out.println(wbp("samsungandmangok", _dict));
+            }
+        }
