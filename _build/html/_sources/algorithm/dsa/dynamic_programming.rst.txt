@@ -1693,12 +1693,9 @@ Box Stacking
             vector<vector<int>> arr;
             for (auto box : boxes) {
                 sort(box.begin(), box.end());
-                vector<int> tmp1{box[0], box[1], box[2]};
-                arr.push_back(tmp1);
-                vector<int> tmp2{box[1], box[0], box[2]};
-                arr.push_back(tmp2);
-                vector<int> tmp3{box[2], box[0], box[1]};
-                arr.push_back(tmp3);
+                arr.push_back({box[0], box[1], box[2]});
+                arr.push_back({box[1], box[0], box[2]});
+                arr.push_back({box[2], box[0], box[1]});
             }
             sort(arr.begin(), arr.end(), [](vector<int> a, vector<int> b) {
                 return a[1]*a[2] > b[1]*b[2];
