@@ -1514,3 +1514,66 @@ Word Break Problem
                 System.out.println(wbp("samsungandmangok", _dict));
             }
         }
+
+Maximal Product when Cutting Rope
+---------------------------------
+
+:Time Complexity: :math:`O(N^2)`
+:Auxiliary Space: :math:`O(N)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def mpcr(n):
+            dp = [0 for i in range(n+1)]
+            for i in range(2, n+1):
+                for j in range(1, i):
+                    dp[i] = max(dp[i], j*(i-j), j*dp[i-j])
+            return dp[n]
+
+        if __name__ == '__main__':
+            print(mpcr(10))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int max(int x, int y, int z) {
+            return max(x, max(y, z));
+        }
+
+        int mpcr(int n) {
+            int dp[n+1] = {};
+            for (int i=2; i<=n; ++i) {
+                for (int j=1; j<i; ++j) {
+                    dp[i] = max(dp[i], j*(i-j), j*dp[i-j]);
+                }
+            }
+            return dp[n];
+        }
+
+        int main() {
+            cout << mpcr(10);
+        }
+
+    .. code-tab:: java
+
+        class MPCR {
+            static int max(int x, int y, int z) {
+                return Math.max(x, Math.max(y, z));
+            }
+            static int mpcr(int n) {
+                int dp[] = new int[n+1];
+                for (int i=2; i<=n; ++i) {
+                    for (int j=1; j<i; ++j) {
+                        dp[i] = max(dp[i], j*(i-j), j*dp[i-j]);
+                    }
+                }
+                return dp[n];
+            }
+            public static void main(String args[]) {
+                System.out.println(mpcr(10));
+            }
+        }
