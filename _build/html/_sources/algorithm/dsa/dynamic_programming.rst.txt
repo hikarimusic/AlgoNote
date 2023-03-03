@@ -1577,3 +1577,186 @@ Maximal Product when Cutting Rope
                 System.out.println(mpcr(10));
             }
         }
+
+Dice Throw Problem
+------------------
+
+:Time Complexity: :math:`O(N\times S\times F)`
+:Auxiliary Space: :math:`O(N\times S)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def dtp(f, n, s):
+            dp = [[0 for j in range(s+1)] for i in range(n+1)]
+            dp[0][0] = 1
+            for i in range(1, n+1):
+                for j in range(1, s+1):
+                    for k in range(1, min(j, f)+1):
+                        dp[i][j] += dp[i-1][j-k]
+            return dp[n][s]
+
+        if __name__ == '__main__':
+            print(dtp(4, 2, 1))
+            print(dtp(2, 2, 3))
+            print(dtp(6, 3, 8))
+            print(dtp(4, 2, 5))
+            print(dtp(4, 3, 5))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int dtp(int f, int n, int s) {
+            int dp[n+1][s+1] = {};
+            dp[0][0] = 1;
+            for (int i=1; i<=n; ++i) {
+                for (int j=1; j<=s; ++j) {
+                    for (int k=1; k<=min(j, f); ++k) {
+                        dp[i][j] += dp[i-1][j-k];
+                    }
+                }
+            }
+            return dp[n][s];
+        }
+
+        int main() {
+            cout << dtp(4, 2, 1) << endl;
+            cout << dtp(2, 2, 3) << endl;
+            cout << dtp(6, 3, 8) << endl;
+            cout << dtp(4, 2, 5) << endl;
+            cout << dtp(4, 3, 5) << endl;
+        }
+
+    .. code-tab:: java
+
+        class DTP {
+            static int dtp(int f, int n, int s) {
+                int dp[][] = new int[n+1][s+1];
+                dp[0][0] = 1;
+                for (int i=1; i<=n; ++i) {
+                    for (int j=1; j<=s; ++j) {
+                        for (int k=1; k<=Math.min(j, f); ++k) {
+                            dp[i][j] += dp[i-1][j-k];
+                        }
+                    }
+                }
+                return dp[n][s];
+            }
+            public static void main(String args[]) {
+                System.out.println(dtp(4, 2, 1));
+                System.out.println(dtp(2, 2, 3));
+                System.out.println(dtp(6, 3, 8));
+                System.out.println(dtp(4, 2, 5));
+                System.out.println(dtp(4, 3, 5));
+            }
+        }
+
+Box Stacking
+------------
+
+:Time Complexity: :math:`O(N^2)`
+:Auxiliary Space: :math:`O(N)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def bs(boxes):
+            arr = []
+            for box in boxes:
+                box.sort()
+                arr.append([box[0], box[1], box[2]])
+                arr.append([box[1], box[0], box[2]])
+                arr.append([box[2], box[0], box[1]])
+            arr.sort(key=lambda x: x[1]*x[2], reverse=True)
+            n = len(arr)
+            dp = [arr[i][0] for i in range(n)]
+            for i in range(1, n):
+                for j in range(i):
+                    if arr[j][1] > arr[i][1] and arr[j][2] > arr[i][2]:
+                        dp[i] = max(dp[i], dp[j]+arr[i][0])
+            return dp[n-1]
+
+        if __name__ == '__main__':
+            boxes = [[4, 6, 7], [1, 2, 3], [4, 5, 6], [10, 12, 32]]
+            print(bs(boxes))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int bs(vector<vector<int>> boxes) {
+            vector<vector<int>> arr;
+            for (auto box : boxes) {
+                sort(box.begin(), box.end());
+                vector<int> tmp1{box[0], box[1], box[2]};
+                arr.push_back(tmp1);
+                vector<int> tmp2{box[1], box[0], box[2]};
+                arr.push_back(tmp2);
+                vector<int> tmp3{box[2], box[0], box[1]};
+                arr.push_back(tmp3);
+            }
+            sort(arr.begin(), arr.end(), [](vector<int> a, vector<int> b) {
+                return a[1]*a[2] > b[1]*b[2];
+            });
+            int n = arr.size();
+            int dp[n] = {};
+            for (int i=0; i<n; ++i) {
+                dp[i] = arr[i][0];
+            }
+            for (int i=1; i<n; ++i) {
+                for (int j=0; j<i; ++j) {
+                    if (arr[j][1]>arr[i][1] && arr[j][2]>arr[i][2]) {
+                        dp[i] = max(dp[i], dp[j]+arr[i][0]);
+                    }
+                }
+            }
+            return dp[n-1];
+        }
+
+        int main() {
+            vector<vector<int>> boxes{{4, 6, 7}, {1, 2, 3}, {4, 5, 6}, {10, 12, 32}};
+            cout << bs(boxes);
+        }
+
+    .. code-tab:: java
+
+        import java.util.*;
+
+        class BS {
+            static int bs(int boxes[][]) {
+                ArrayList<int[]> arr = new ArrayList<int[]>();
+                for (int[] box : boxes) {
+                    Arrays.sort(box);
+                    arr.add(new int[]{box[0], box[1], box[2]});
+                    arr.add(new int[]{box[1], box[0], box[2]});
+                    arr.add(new int[]{box[2], box[0], box[1]});
+                }
+                Collections.sort(arr, new Comparator<int[]>() {
+                    public int compare(int[] a, int[] b) {
+                        return Integer.compare(b[1]*b[2], a[1]*a[2]);
+                    }
+                });
+                int n = arr.size();
+                int dp[] = new int[n];
+                for (int i=0; i<n; ++i) {
+                    dp[i] = arr.get(i)[0];
+                }
+                for (int i=1; i<n; ++i) {
+                    for (int j=0; j<i; ++j) {
+                        if (arr.get(j)[1]>arr.get(i)[1] && arr.get(j)[2]>arr.get(i)[2]) {
+                            dp[i] = Math.max(dp[i], dp[j]+arr.get(i)[0]);
+                        }
+                    }
+                }
+                return dp[n-1];
+            }
+            public static void main(String args[]) {
+                int boxes[][] = {{4, 6, 7}, {1, 2, 3}, {4, 5, 6}, {10, 12, 32}};
+                System.out.println(bs(boxes));
+            }
+        }
