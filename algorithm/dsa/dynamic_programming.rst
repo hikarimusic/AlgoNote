@@ -1757,3 +1757,75 @@ Box Stacking
                 System.out.println(bs(boxes));
             }
         }
+
+Egg Dropping Puzzle
+-------------------
+
+:Time Complexity: :math:`O(N\times F^2)`
+:Auxiliary Space: :math:`O(N\times F)`
+
+.. tabs::
+
+    .. code-tab:: python
+
+        def edp(n, f):
+            dp = [[0 for j in range(f+1)] for i in range(n+1)]
+            for j in range(1, f+1):
+                dp[0][j] = float('inf')
+            for i in range(1, n+1):
+                for j in range(1, f+1):
+                    dp[i][j] = float('inf')
+                    for k in range(1, j+1):
+                        dp[i][j] = min(dp[i][j], 1+max(dp[i-1][k-1], dp[i][j-k]))
+            return dp[n][f]
+
+        if __name__ == '__main__':
+            print(edp(2, 36))
+
+    .. code-tab:: cpp
+
+        # include <bits/stdc++.h>
+        using namespace std;
+
+        int edp(int n, int f) {
+            int dp[n+1][f+1] = {};
+            for (int j=1; j<=f; ++j) {
+                dp[0][j] = INT_MAX - 1000;
+            }
+            for (int i=1; i<=n; ++i) {
+                for (int j=1; j<=f; ++j) {
+                    dp[i][j] = INT_MAX - 1000;
+                    for (int k=1; k<=j; ++k) {
+                        dp[i][j] = min(dp[i][j], 1+max(dp[i-1][k-1], dp[i][j-k]));
+                    }
+                }
+            }
+            return dp[n][f];
+        }
+
+        int main() {
+            cout << edp(2, 36);
+        }
+
+    .. code-tab:: java
+
+        class EDP {
+            static int edp(int n, int f) {
+                int dp[][] = new int[n+1][f+1];
+                for (int j=1; j<=f; ++j) {
+                    dp[0][j] = Integer.MAX_VALUE - 1000;
+                }
+                for (int i=1; i<=n; ++i) {
+                    for (int j=1; j<=f; ++j) {
+                        dp[i][j] = Integer.MAX_VALUE;
+                        for (int k=1; k<=j; ++k) {
+                            dp[i][j] = Math.min(dp[i][j], 1+Math.max(dp[i-1][k-1], dp[i][j-k]));
+                        }
+                    }
+                }
+                return dp[n][f];
+            }
+            public static void main(String args[]) {
+                System.out.println(edp(2, 36));
+            }
+        }
