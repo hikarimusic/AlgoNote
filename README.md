@@ -1,2 +1,2 @@
 # AlgoNote
-Notes on DSA and ML.
+Notes on DSA and ML
