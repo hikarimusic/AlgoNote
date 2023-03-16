@@ -57,8 +57,8 @@ Longest Common Subsequence
 
     .. code-tab:: java
 
-        class LCS {
-            static int lcs(String X, String Y) {
+        public class LCS {
+            public static int lcs(String X, String Y) {
                 int n = X.length();
                 int m = Y.length();
                 int dp[][] = new int[n+1][m+1];
@@ -140,8 +140,8 @@ Longest Increasing Subsequence
 
     .. code-tab:: java
 
-        class LIS {
-            static int lis(int arr[]) {
+        public class LIS {
+            public static int lis(int arr[]) {
                 int n = arr.length;
                 int dp[] = new int[n];
                 for (int i=0; i<n; ++i) {
@@ -238,11 +238,11 @@ Edit Distance
 
     .. code-tab:: java
 
-        class ED {
-            static int min(int x, int y, int z) {
+        public class ED {
+            public static int min(int x, int y, int z) {
                 return Math.min(x, Math.min(y, z));
             }
-            static int ed(String X, String Y) {
+            public static int ed(String X, String Y) {
                 int n = X.length();
                 int m = Y.length();
                 int dp[][] = new int[n+1][m+1];
@@ -348,8 +348,8 @@ Minimum Partition
 
     .. code-tab:: java
 
-        class MP {
-            static int mp(int arr[]) {
+        public class MP {
+            public static int mp(int arr[]) {
                 int n = arr.length;
                 int s = 0;
                 for (int a : arr) {
@@ -431,8 +431,8 @@ Ways to Cover a Distance
 
     .. code-tab:: java
 
-        class WCD {
-            static int wcd(int n) {
+        public class WCD {
+            public static int wcd(int n) {
                 int dp[] = new int[n+1];
                 dp[0] = 1;
                 if (n>=1) dp[1] = 1;
@@ -537,8 +537,8 @@ Longest Path In Matrix
 
     .. code-tab:: java
 
-        class LPIM {
-            static int search(int i, int j, int mat[][], int dp[][]) {
+        public class LPIM {
+            public static int search(int i, int j, int mat[][], int dp[][]) {
                 if (i<0 || i>mat.length || j<0 || j>mat[0].length) {
                     return 0;
                 }
@@ -561,7 +561,7 @@ Longest Path In Matrix
                 dp[i][j] = Math.max(x, Math.max(y, Math.max(z, w)));
                 return dp[i][j];
             }
-            static int lpim(int mat[][]) {
+            public static int lpim(int mat[][]) {
                 int n = mat.length;
                 int m = mat[0].length;
                 int dp[][] = new int[n][m];
@@ -645,8 +645,8 @@ Subset Sum Problem
 
     .. code-tab:: java
 
-        class SSS {
-            static boolean sss(int _set[], int _sum) {
+        public class SSS {
+            public static boolean sss(int _set[], int _sum) {
                 int n=_set.length;
                 int s=_sum;
                 boolean dp[][] = new boolean[n+1][s+1];
@@ -741,8 +741,8 @@ Optimal Strategy for a Game
 
     .. code-tab:: java
 
-        class OSG {
-            static int osg(int arr[]) {
+        public class OSG {
+            public static int osg(int arr[]) {
                 int n = arr.length;
                 int dp[][] = new int[n][n];
                 int i;
@@ -828,8 +828,8 @@ Optimal Strategy for a Game
 
     .. code-tab:: java
 
-        class KP01 {
-            static int kp01(int val[], int wt[], int w) {
+        public class KP01 {
+            public static int kp01(int val[], int wt[], int w) {
                 int n = val.length;
                 int dp[][] = new int[n+1][w+1];
                 for (int i=1; i<=n; ++i) {
@@ -938,8 +938,8 @@ Boolean Parenthesization Problem
 
     .. code-tab:: java
 
-        class BPP {
-            static int bpp(String symb, String oper) {
+        public class BPP {
+            public static int bpp(String symb, String oper) {
                 int n = symb.length();
                 int T[][] = new int[n][n];
                 int F[][] = new int[n][n];
@@ -1044,8 +1044,8 @@ Shortest Common Supersequence
 
     .. code-tab:: java
 
-        class SCS {
-            static int scs(String X, String Y) {
+        public class SCS {
+            public static int scs(String X, String Y) {
                 int n = X.length();
                 int m = Y.length();
                 int dp[][] = new int[n+1][m+1];
@@ -1125,8 +1125,8 @@ Matrix Chain Multiplication
 
     .. code-tab:: java
 
-        class MCM {
-            static int mcm(int arr[]) {
+        public class MCM {
+            public static int mcm(int arr[]) {
                 int n = arr.length - 1;
                 int dp[][] = new int[n][n];
                 for (int g=1; g<n; ++g) {
@@ -1213,8 +1213,8 @@ Partition Problem
 
     .. code-tab:: java
 
-        class PP {
-            static boolean pp(int arr[]) {
+        public class PP {
+            public static boolean pp(int arr[]) {
                 int n = arr.length;
                 int s = 0;
                 for (int a : arr) {
@@ -1296,8 +1296,8 @@ Rod Cutting
 
     .. code-tab:: java
 
-        class RC {
-            static int rc(int price[]) {
+        public class RC {
+            public static int rc(int price[]) {
                 int n = price.length;
                 int dp[][] = new int[n+1][n+1];
                 for (int i=1; i<=n; ++i) {
@@ -1378,8 +1378,8 @@ Coin Change Proplem
 
     .. code-tab:: java
 
-        class CCP {
-            static int ccp(int coin[], int _sum) {
+        public class CCP {
+            public static int ccp(int coin[], int _sum) {
                 int n = coin.length;
                 int s = _sum;
                 int dp[][] = new int[n+1][s+1];
@@ -1481,8 +1481,8 @@ Word Break Problem
 
     .. code-tab:: java
 
-        class WBP {
-            static boolean wordin(String w, String _dict[]) {
+        public class WBP {
+            public static boolean wordin(String w, String _dict[]) {
                 for (String d : _dict) {
                     if (w.equals(d)) {
                         return true;
@@ -1490,7 +1490,7 @@ Word Break Problem
                 }
                 return false;
             }
-            static boolean wbp(String s, String _dict[]) {
+            public static boolean wbp(String s, String _dict[]) {
                 int n = s.length();
                 boolean dp[] = new boolean[n+1];
                 dp[0] = true;
@@ -1560,11 +1560,11 @@ Maximal Product when Cutting Rope
 
     .. code-tab:: java
 
-        class MPCR {
-            static int max(int x, int y, int z) {
+        public class MPCR {
+            public static int max(int x, int y, int z) {
                 return Math.max(x, Math.max(y, z));
             }
-            static int mpcr(int n) {
+            public static int mpcr(int n) {
                 int dp[] = new int[n+1];
                 for (int i=2; i<=n; ++i) {
                     for (int j=1; j<i; ++j) {
@@ -1632,8 +1632,8 @@ Dice Throw Problem
 
     .. code-tab:: java
 
-        class DTP {
-            static int dtp(int f, int n, int s) {
+        public class DTP {
+            public static int dtp(int f, int n, int s) {
                 int dp[][] = new int[n+1][s+1];
                 dp[0][0] = 1;
                 for (int i=1; i<=n; ++i) {
@@ -1724,8 +1724,8 @@ Box Stacking
 
         import java.util.*;
 
-        class BS {
-            static int bs(int boxes[][]) {
+        public class BS {
+            public static int bs(int boxes[][]) {
                 ArrayList<int[]> arr = new ArrayList<int[]>();
                 for (int[] box : boxes) {
                     Arrays.sort(box);
@@ -1809,8 +1809,8 @@ Egg Dropping Puzzle
 
     .. code-tab:: java
 
-        class EDP {
-            static int edp(int n, int f) {
+        public class EDP {
+            public static int edp(int n, int f) {
                 int dp[][] = new int[n+1][f+1];
                 for (int j=1; j<=f; ++j) {
                     dp[0][j] = Integer.MAX_VALUE - 1000;
