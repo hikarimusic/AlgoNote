@@ -1,2 +1,2 @@
-# HikariNote
-Hikari's Personal Note: Physics, Algorithm, and Math
+# AlgoNote
+Notes on DSA and ML.
